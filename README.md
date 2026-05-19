@@ -1,4 +1,3 @@
-# examcode
 #include <stdio.h>
 #include <string.h>
 
@@ -20,7 +19,35 @@ int main() {
 
     return 0;
 }
-___________________________________________________
+
+
+-----------------------------------
+
+
+Enter a string: world
+Result after XOR with 0: world
+
+
+
+
+
+#include <stdio.h>
+
+int main() {
+    char *str = "World";   // char pointer string
+
+    printf("Original String: %s\n", str);
+    printf("After XOR with 0: ");
+
+    for (int i = 0; str[i] != '\0'; i++) {
+        char result = str[i] ^ 0;   // XOR with 0
+        printf("%c", result);
+    }
+
+    return 0;
+}
+-------------------------------------------------------------
+week 2
 
 #include <stdio.h>
 
@@ -51,8 +78,43 @@ int main() {
     return 0;
 }
 
+
+
+#include <stdio.h>
+
+int main() {
+    char *str = "World";   // char pointer
+
+    printf("Original String     : %s\n", str);
+
+    printf("After AND with 127 : ");
+    for(int i = 0; str[i] != '\0'; i++) {
+        printf("%d ", str[i] & 127);
+    }
+
+    printf("\nAfter OR with 127  : ");
+    for(int i = 0; str[i] != '\0'; i++) {
+        printf("%d ", str[i] | 127);
+    }
+
+    printf("\nAfter XOR with 127 : ");
+    for(int i = 0; str[i] != '\0'; i++) {
+        printf("%d ", str[i] ^ 127);
+    }
+
+    return 0;
+}
 __________________________________________
 
+
+Enter a string: world
+
+Original String     : world
+After AND with 127 : 119 111 114 108 100 
+After OR with 127  : 127 127 127 127 127 
+After XOR with 127 : 8 16 13 19 27 
+---------------------------------------------
+week 3
 import java.util.*;
 
 public class CaesarCipher {
@@ -97,9 +159,14 @@ public class CaesarCipher {
 }
 
 
+__________________________________________________________________
 
-____________________________________________________
 
+Enter text: hello
+Enter shift key: 3
+Encrypted Text: khoor
+Decrypted Text: hello
+---------------------------------
 import java.util.*;
 
 public class SubstitutionCipher {
@@ -143,6 +210,11 @@ public class SubstitutionCipher {
 ____________________________________________________________
 
 
+Enter plain text: world
+Enter 26-letter substitution key: qwertyuiopasdfghjklzxcvbnm
+Encrypted Text: VGKSR
+Decrypted Text: WORLD
+------------------------------------------------------
 import java.util.*;
 
 public class HillCipherEasy {
@@ -204,7 +276,7 @@ public class HillCipherEasy {
             int b = text.charAt(i+1) - 'A';
 
             int x = (key[0][0]*a + key[0][1]*b) % 26;
-            int y = (key[1][0]*a + key[1][1]*b) % 26;
+            int y = (key[1][0]*a + key[1][1]*b) % 26;u
 
             enc += (char)(x + 'A');
             enc += (char)(y + 'A');
@@ -227,106 +299,8 @@ public class HillCipherEasy {
         System.out.println("Decrypted Text: " + dec);
     }
 }
-________________________________________________________________
-import java.util.*;
-
-public class CryptoCombined {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        while(true) {
-            System.out.println("\n--- MENU ---");
-            System.out.println("1. Caesar Cipher");
-            System.out.println("2. Substitution Cipher");
-            System.out.println("3. Exit");
-
-            System.out.println("______________________");
-            System.out.print("Enter your choice: ");
-
-            int choice = sc.nextInt();
-            sc.nextLine();
-
-            switch(choice) {
-
-                case 1:
-                    // Caesar Cipher
-                    System.out.print("Enter text: ");
-                    String text = sc.nextLine();
-
-                    System.out.print("Enter shift key: ");
-                    int key = sc.nextInt();
-                    sc.nextLine();
-
-                    String encrypt = "", decrypt = "";
-
-                    for (int i = 0; i < text.length(); i++) {
-                        char ch = text.charAt(i);
-
-                        if (Character.isLetter(ch)) {
-                            char base = Character.isUpperCase(ch) ? 'A' : 'a';
-                            encrypt += (char)((ch - base + key) % 26 + base);
-                        } else {
-                            encrypt += ch;
-                        }
-                    }
-
-                    for (int i = 0; i < encrypt.length(); i++) {
-                        char ch = encrypt.charAt(i);
-
-                        if (Character.isLetter(ch)) {
-                            char base = Character.isUpperCase(ch) ? 'A' : 'a';
-                            decrypt += (char)((ch - base - key + 26) % 26 + base);
-                        } else {
-                            decrypt += ch;
-                        }
-                    }
-
-                    System.out.println("Encrypted Text: " + encrypt);
-                    System.out.println("Decrypted Text: " + decrypt);
-                    break;
-
-                case 2:
-                    // Substitution Cipher
-                    System.out.print("Enter text: ");
-                    String text2 = sc.nextLine().toUpperCase();
-
-                    System.out.print("Enter 26-letter key: ");
-                    String subKey = sc.nextLine().toUpperCase();
-
-                    String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                    String enc2 = "", dec2 = "";
-
-                    for (char ch : text2.toCharArray()) {
-                        if (Character.isLetter(ch)) {
-                            enc2 += subKey.charAt(alphabet.indexOf(ch));
-                        } else {
-                            enc2 += ch;
-                        }
-                    }
-
-                    for (char ch : enc2.toCharArray()) {
-                        if (Character.isLetter(ch)) {
-                            dec2 += alphabet.charAt(subKey.indexOf(ch));
-                        } else {
-                            dec2 += ch;
-                        }
-                    }
-
-                    System.out.println("Encrypted Text: " + enc2);
-                    System.out.println("Decrypted Text: " + dec2);
-                    break;
-
-                case 3:
-                    System.out.println("Exiting program...");
-                    return;
-
-                default:
-                    System.out.println("Invalid choice!");
-            }
-        }
-    }
-}
-_________________________________________________________________
+-------------------------------------------------------
+week 4
 import java.util.*;
 import java.util.Base64;
 import java.io.ByteArrayOutputStream;
@@ -419,332 +393,885 @@ public class SimpleDESFinal{
     }
 }
 
-__________________________________________________________
+___________________________________________________________________
+
+Enter text: hellos
+Enter 8-character key: qwertyui
+Encrypted Text: bppnl3iL
+Decrypted Text: hellos
+-------------------------------------------------------------------
+week 5
 import java.util.*;
 
-public class SimpleAESFinal {
-
-    static int[][] state = new int[4][4];
-
-    static int sub(int x) {
-        return (x * 5 + 3) % 26;
-    }
-
-    static int invsub(int x) {
-        for (int i = 0; i < 26; i++)
-            if ((i * 5 + 3) % 26 == x)
-                return i;
-        return 0;
-    }
-
-    static void shiftRows() {
-        for (int i = 1; i < 4; i++) {
-            int[] temp = state[i].clone();
-            for (int j = 0; j < 4; j++)
-                state[i][j] = temp[(j + i) % 4];
-        }
-    }
-
-    static void invShiftRows() {
-        for (int i = 1; i < 4; i++) {
-            int[] temp = state[i].clone();
-            for (int j = 0; j < 4; j++)
-                state[i][(j + i) % 4] = temp[j];
-        }
-    }
-
-    static void addKey(int[][] key) {
-        for (int i = 0; i < 4; i++)
-            for (int j = 0; j < 4; j++)
-                state[i][j] = (state[i][j] + key[i][j]) % 26;
-    }
-
-    static void subKey(int[][] key) {
-        for (int i = 0; i < 4; i++)
-            for (int j = 0; j < 4; j++)
-                state[i][j] = (state[i][j] - key[i][j] + 26) % 26;
-    }
-
-    static void load(String text) {
-        int k = 0;
-        for (int i = 0; i < 4; i++)
-            for (int j = 0; j < 4; j++)
-                state[i][j] = text.charAt(k++) - 'A';
-    }
-
-    static String getText() {
-        String s = "";
-        for (int i = 0; i < 4; i++)
-            for (int j = 0; j < 4; j++)
-                s += (char)(state[i][j] + 'A');
-        return s;
-    }
-
-    static int[][] getKey(String keyText) {
-        int[][] key = new int[4][4];
-        int k = 0;
-        for (int i = 0; i < 4; i++)
-            for (int j = 0; j < 4; j++)
-                key[i][j] = keyText.charAt(k++) - 'A';
-        return key;
-    }
-
-    static String encrypt(String text, int[][] key) {
-        load(text);
-        addKey(key);
-
-        for (int r = 0; r < 9; r++) {
-            for (int i = 0; i < 4; i++)
-                for (int j = 0; j < 4; j++)
-                    state[i][j] = sub(state[i][j]);
-
-            shiftRows();
-            addKey(key);
-        }
-
-        for (int i = 0; i < 4; i++)
-            for (int j = 0; j < 4; j++)
-                state[i][j] = sub(state[i][j]);
-
-        shiftRows();
-        addKey(key);
-
-        return getText();
-    }
-
-    static String decrypt(String text, int[][] key) {
-        load(text);
-        subKey(key);
-
-        for (int r = 0; r < 9; r++) {
-            invShiftRows();
-
-            for (int i = 0; i < 4; i++)
-                for (int j = 0; j < 4; j++)
-                    state[i][j] = invsub(state[i][j]);
-
-            subKey(key);
-        }
-
-        invShiftRows();
-
-        for (int i = 0; i < 4; i++)
-            for (int j = 0; j < 4; j++)
-                state[i][j] = invsub(state[i][j]);
-
-        subKey(key);
-
-        return getText();
-    }
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("Enter 16-letter text: ");
-        String text = sc.nextLine().toUpperCase();
-
-        System.out.print("Enter 16-letter key: ");
-        String keyText = sc.nextLine().toUpperCase();
-
-        if (text.length() != 16 || keyText.length() != 16) {
-            System.out.println("Must be exactly 16 letters!");
-            return;
-        }
-
-        int[][] key = getKey(keyText);
-
-        String enc = encrypt(text, key);
-        System.out.println("Encrypted: " + enc);
-
-        String dec = decrypt(enc, key);
-        System.out.println("Decrypted: " + dec);
-    }
-}
-_______________________________________________________________
-import java.util.Base64;
-import java.util.Scanner;
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
-
-public class BlowfishAPI {
-    public static void main(String[] args) throws Exception {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("Enter text: ");
-        String text = sc.nextLine();
-
-        System.out.print("Enter key: ");
-        String key = sc.nextLine();
-
-        SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(), "Blowfish");
-        Cipher cipher = Cipher.getInstance("Blowfish");
-
-        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-        byte[] encrypted = cipher.doFinal(text.getBytes());
-        String encryptedText = Base64.getEncoder().encodeToString(encrypted);
-
-        System.out.println("Encrypted: " + encryptedText);
-
-        cipher.init(Cipher.DECRYPT_MODE, secretKey);
-        byte[] decrypted = cipher.doFinal(Base64.getDecoder().decode(encryptedText));
-
-        System.out.println("Decrypted: " + new String(decrypted));
-
-        sc.close();
-    }
-}
-
-
-
-_____________________________________________________
-
-import java.util.Base64;
-import java.util.Scanner;
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-
-public class BlowfishAutoKey {
-
-    public static void main(String[] args) throws Exception {
-
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("Enter text: ");
-        String text = sc.nextLine();
-
-        // Generate Blowfish key
-        KeyGenerator keyGen = KeyGenerator.getInstance("Blowfish");
-        keyGen.init(128); // key size
-        SecretKey key = keyGen.generateKey();
-
-        // Cipher
-        Cipher cipher = Cipher.getInstance("Blowfish");
-
-        // Encryption
-        cipher.init(Cipher.ENCRYPT_MODE, key);
-        byte[] encrypted = cipher.doFinal(text.getBytes());
-        String enc = Base64.getEncoder().encodeToString(encrypted);
-
-        System.out.println("Encrypted: " + enc);
-
-        // Decryption
-        cipher.init(Cipher.DECRYPT_MODE, key);
-        byte[] decrypted = cipher.doFinal(Base64.getDecoder().decode(enc));
-
-        System.out.println("Decrypted: " + new String(decrypted));
-
-        sc.close();
-    }
-}
-________________________________________________________________
-import java.util.*;
-
-public class BlowfishStandardSim {
+public class SimpleBlowfish {
 
     static int[] P = new int[18];
-    static int[][] S = new int[4][256];
+    static int[] S = new int[256];
 
     // Initialize P-array and S-box using key
-    static void init(int key) {
-        for (int i = 0; i < 18; i++)
-            P[i] = (i + 1) ^ key;
+    static void init(String key) {
 
-        for (int i = 0; i < 4; i++)
-            for (int j = 0; j < 256; j++)
-                S[i][j] = (i * 256 + j) ^ key;
+        int k = 0;
+
+        for (char ch : key.toCharArray()) {
+            k += ch;
+        }
+
+        for (int i = 0; i < 18; i++) {
+            P[i] = k ^ (i + 1);
+        }
+
+        for (int i = 0; i < 256; i++) {
+            S[i] = (k + i) ^ 0x5A;
+        }
     }
 
-    // F function using S-box
+    // F-function
     static int F(int x) {
-        int a = (x >>> 24) & 0xFF;
-        int b = (x >>> 16) & 0xFF;
-        int c = (x >>> 8) & 0xFF;
-        int d = x & 0xFF;
 
-        return ((S[0][a] + S[1][b]) ^ S[2][c]) + S[3][d];
+        int a = (x >> 8) & 0xFF;
+        int b = x & 0xFF;
+
+        return (S[a] + S[b]) ^ 7;
     }
 
-    // Encryption (16 rounds)
+    // Encryption
     static int[] encrypt(int L, int R) {
-        for (int i = 0; i < 16; i++) {
-            L ^= P[i];
-            R ^= F(L);
 
+        for (int i = 0; i < 16; i++) {
+
+            L = L ^ P[i];
+
+            R = R ^ F(L);
+
+            // Swap
             int temp = L;
             L = R;
             R = temp;
         }
 
+        // Undo final swap
         int temp = L;
         L = R;
         R = temp;
 
-        R ^= P[16];
-        L ^= P[17];
+        R = R ^ P[16];
+        L = L ^ P[17];
 
         return new int[]{L, R};
     }
 
     // Decryption
     static int[] decrypt(int L, int R) {
-        for (int i = 17; i > 1; i--) {
-            L ^= P[i];
-            R ^= F(L);
 
+        for (int i = 17; i > 1; i--) {
+
+            L = L ^ P[i];
+
+            R = R ^ F(L);
+
+            // Swap
             int temp = L;
             L = R;
             R = temp;
         }
 
+        // Undo final swap
         int temp = L;
         L = R;
         R = temp;
 
-        R ^= P[1];
-        L ^= P[0];
+        R = R ^ P[1];
+        L = L ^ P[0];
 
         return new int[]{L, R};
     }
 
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter text: ");
-        String text = sc.nextLine();
+        System.out.print("Enter plaintext: ");
+        String text = sc.nextLine().toUpperCase().replaceAll(" ", "");;
 
-        // 🔥 Added line (clean input)
-        text = text.toUpperCase().replaceAll(" ", "");
+        
 
-        System.out.print("Enter key (int): ");
-        int key = sc.nextInt();
+        System.out.print("Enter key: ");
+        String key = sc.nextLine();
 
-        // Initialize with key
+        // Initialize using key
         init(key);
 
-        // Padding if odd length
-        if (text.length() % 2 != 0)
+        // Padding
+        if (text.length() % 2 != 0) {
             text += "X";
+        }
 
-        String decrypted = "";
+        String encryptedText = "";
+        String decryptedText = "";
 
-        System.out.println("Encrypted blocks:");
-
+        // Process 2 characters at a time
         for (int i = 0; i < text.length(); i += 2) {
 
             int L = text.charAt(i);
             int R = text.charAt(i + 1);
 
+            // Encrypt
             int[] enc = encrypt(L, R);
-            System.out.println(Arrays.toString(enc));
 
+            // Store encrypted text
+            encryptedText +=
+                    Integer.toHexString(enc[0]) + " ";
+
+            encryptedText +=
+                    Integer.toHexString(enc[1]) + " ";
+
+            // Decrypt
             int[] dec = decrypt(enc[0], enc[1]);
 
-            decrypted += (char) dec[0];
-            decrypted += (char) dec[1];
+            decryptedText +=
+                    (char)(dec[0] & 0xFF);
+
+            decryptedText +=
+                    (char)(dec[1] & 0xFF);
         }
 
-        System.out.println("Decrypted Text: " + decrypted);
+        System.out.println("\nEncrypted Text: "
+                + encryptedText);
+
+        System.out.println("Decrypted Text: "
+                + decryptedText);
+
+        sc.close();
+    }
+}
+-----------------------------------------------------------
+week6
+import java.util.*;
+
+public class SimpleAESFinal {
+
+    static int[][] state = new int[4][4];
+
+    // ---------------- SubBytes ----------------
+    static int sub(int x) {
+        return (x * 5 + 3) % 26;
+    }
+
+    // ---------------- Inverse SubBytes ----------------
+    static int invSub(int x) {
+        return (21 * (x - 3 + 26)) % 26;
+    }
+
+    // ---------------- ShiftRows ----------------
+    static void shiftRows() {
+
+        for (int i = 1; i < 4; i++) {
+
+            int[] temp = state[i].clone();
+
+            for (int j = 0; j < 4; j++) {
+
+                state[i][j] = temp[(j + i) % 4];
+            }
+        }
+    }
+
+    // ---------------- Inverse ShiftRows ----------------
+    static void invShiftRows() {
+
+        for (int i = 1; i < 4; i++) {
+
+            int[] temp = state[i].clone();
+
+            for (int j = 0; j < 4; j++) {
+
+                state[i][(j + i) % 4] = temp[j];
+            }
+        }
+    }
+
+    // ---------------- AddRoundKey ----------------
+    static void addKey(int[][] key) {
+
+        for (int i = 0; i < 4; i++) {
+
+            for (int j = 0; j < 4; j++) {
+
+                state[i][j] =
+                        (state[i][j] + key[i][j]) % 26;
+            }
+        }
+    }
+
+    // ---------------- Reverse AddRoundKey ----------------
+    static void subKey(int[][] key) {
+
+        for (int i = 0; i < 4; i++) {
+
+            for (int j = 0; j < 4; j++) {
+
+                state[i][j] =
+                        (state[i][j] - key[i][j] + 26) % 26;
+            }
+        }
+    }
+
+    // ---------------- Load Plaintext ----------------
+    static void load(String text) {
+
+        int k = 0;
+
+        for (int i = 0; i < 4; i++) {
+
+            for (int j = 0; j < 4; j++) {
+
+                state[i][j] =
+                        text.charAt(k++) - 'A';
+            }
+        }
+    }
+
+    // ---------------- Convert Matrix to Text ----------------
+    static String getText() {
+
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < 4; i++) {
+
+            for (int j = 0; j < 4; j++) {
+
+                sb.append((char)
+                        (state[i][j] + 'A'));
+            }
+        }
+
+        return sb.toString();
+    }
+
+    // ---------------- Generate Key Matrix ----------------
+    static int[][] getKey(String keyText) {
+
+        int[][] key = new int[4][4];
+
+        int k = 0;
+
+        for (int i = 0; i < 4; i++) {
+
+            for (int j = 0; j < 4; j++) {
+
+                key[i][j] =
+                        keyText.charAt(k++) - 'A';
+            }
+        }
+
+        return key;
+    }
+
+    // ---------------- Encryption ----------------
+    static String encrypt(String text, int[][] key) {
+
+        load(text);
+
+        // Initial AddRoundKey
+        addKey(key);
+
+        // 9 Main Rounds
+        for (int r = 0; r < 9; r++) {
+
+            // SubBytes
+            for (int i = 0; i < 4; i++) {
+
+                for (int j = 0; j < 4; j++) {
+
+                    state[i][j] =
+                            sub(state[i][j]);
+                }
+            }
+
+            // ShiftRows
+            shiftRows();
+
+            // AddRoundKey
+            addKey(key);
+        }
+
+        // Final Round
+        for (int i = 0; i < 4; i++) {
+
+            for (int j = 0; j < 4; j++) {
+
+                state[i][j] =
+                        sub(state[i][j]);
+            }
+        }
+
+        shiftRows();
+
+        addKey(key);
+
+        return getText();
+    }
+
+    // ---------------- Decryption ----------------
+    static String decrypt(String text, int[][] key) {
+
+        load(text);
+
+        // Reverse Final Round
+        subKey(key);
+
+        invShiftRows();
+
+        for (int i = 0; i < 4; i++) {
+
+            for (int j = 0; j < 4; j++) {
+
+                state[i][j] =
+                        invSub(state[i][j]);
+            }
+        }
+
+        // Reverse 9 Main Rounds
+        for (int r = 0; r < 9; r++) {
+
+            subKey(key);
+
+            invShiftRows();
+
+            for (int i = 0; i < 4; i++) {
+
+                for (int j = 0; j < 4; j++) {
+
+                    state[i][j] =
+                            invSub(state[i][j]);
+                }
+            }
+        }
+
+        // Reverse Initial AddRoundKey
+        subKey(key);
+
+        return getText();
+    }
+
+    // ---------------- Main Function ----------------
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter 16-letter plaintext : ");
+        String text =
+                sc.nextLine().toUpperCase();
+
+        System.out.print("Enter 16-letter key       : ");
+        String keyText =
+                sc.nextLine().toUpperCase();
+
+        // Validation
+        if (text.length() != 16 ||
+                keyText.length() != 16) {
+
+            System.out.println(
+                    "Input and key must be exactly 16 letters.");
+
+            return;
+        }
+
+      
+
+        int[][] key = getKey(keyText);
+
+        // Encryption
+        String encrypted =
+                encrypt(text, key);
+
+        System.out.println(
+                "\nEncrypted Text : " + encrypted);
+
+        // Decryption
+        String decrypted =
+                decrypt(encrypted, key);
+
+        System.out.println(
+                "Decrypted Text : " + decrypted);
+
+        sc.close();
+    }
+}
+--------------------------------------------------
+week7
+
+"C:\Program Files\Java\jdk-21\bin\keytool.exe" -genseckey -alias myblowfishkey -keyalg Blowfish -keysize 128 -storetype JCEKS -keystore mykeystore.jks -storepass password -keypass password
+
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import java.security.KeyStore;
+import java.io.FileInputStream;
+import java.util.Base64;
+import java.util.Scanner;
+
+public class blow {
+
+    public static void main(String[] args) throws Exception {
+
+        // Scanner for user input
+        Scanner sc = new Scanner(System.in);
+
+        // Take text input from user
+        System.out.print("Enter text to encrypt: ");
+        String text = sc.nextLine();
+
+        // Load keystore
+        KeyStore ks = KeyStore.getInstance("JCEKS");
+
+        FileInputStream fis =
+                new FileInputStream("mykeystore.jks");
+
+        ks.load(fis, "password".toCharArray());
+
+        // Get secret key
+        SecretKey key = (SecretKey)
+                ks.getKey(
+                        "myblowfishkey",
+                        "password".toCharArray()
+                );
+
+        // Check key
+        if (key == null) {
+
+            System.out.println(
+                    "Key not found. Check alias/password."
+            );
+
+            return;
+        }
+
+        // Create Blowfish Cipher
+        Cipher cipher =
+                Cipher.getInstance(
+                        "Blowfish/ECB/PKCS5Padding"
+                );
+
+        // Encryption
+        cipher.init(Cipher.ENCRYPT_MODE, key);
+
+        byte[] encryptedBytes =
+                cipher.doFinal(text.getBytes());
+
+        String encrypted =
+                Base64.getEncoder()
+                        .encodeToString(encryptedBytes);
+
+        // Decryption
+        cipher.init(Cipher.DECRYPT_MODE, key);
+
+        byte[] decryptedBytes =
+                cipher.doFinal(
+                        Base64.getDecoder()
+                                .decode(encrypted)
+                );
+
+        String decrypted =
+                new String(decryptedBytes);
+
+        // Output
+        System.out.println("\nOriginal Text : " + text);
+
+        System.out.println(
+                "Encrypted Text: " + encrypted
+        );
+
+        System.out.println(
+                "Decrypted Text: " + decrypted
+        );
+
+        sc.close();
+    }
+}
+
+
+week 8
+
+import java.util.*;
+
+public class RSA {
+
+    // Find GCD
+    static int gcd(int a, int b) {
+
+        while (b != 0) {
+
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+
+        return a;
+    }
+
+    // Find modular inverse
+    static int modInverse(int e, int phi) {
+
+        for (int d = 1; d < phi; d++) {
+
+            if ((d * e) % phi == 1) {
+                return d;
+            }
+        }
+
+        return 1;
+    }
+
+    // Power function
+    static long power(long base, long exp, long mod) {
+
+        long result = 1;
+
+        while (exp > 0) {
+
+            result = (result * base) % mod;
+            exp--;
+        }
+
+        return result;
+    }
+
+    // Prime check
+    static boolean isPrime(int n) {
+
+        if (n < 2)
+            return false;
+
+        for (int i = 2; i <= n / 2; i++) {
+
+            if (n % i == 0)
+                return false;
+        }
+
+        return true;
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        // Input prime numbers
+        System.out.print("Enter prime number p: ");
+        int p = sc.nextInt();
+
+        System.out.print("Enter prime number q: ");
+        int q = sc.nextInt();
+
+        // Validate primes
+        if (!isPrime(p) || !isPrime(q)) {
+
+            System.out.println(
+                    "Please enter prime numbers only.");
+
+            return;
+        }
+
+        // Compute n
+        int n = p * q;
+
+        // Compute phi
+        int phi = (p - 1) * (q - 1);
+
+        // Choose e
+        int e;
+
+        for (e = 2; e < phi; e++) {
+
+            if (gcd(e, phi) == 1) {
+                break;
+            }
+        }
+
+        // Compute d
+        int d = modInverse(e, phi);
+
+        // Display keys
+        System.out.println(
+                "\nPublic Key (e,n): (" + e + "," + n + ")");
+
+        System.out.println(
+                "Private Key (d,n): (" + d + "," + n + ")");
+
+        // Input message
+        System.out.print(
+                "\nEnter message number: ");
+
+        int message = sc.nextInt();
+
+        // Message validation
+        if (message >= n) {
+
+            System.out.println(
+                    "Message must be less than " + n);
+
+            return;
+        }
+
+        // Encryption
+        long encrypted = power(message, e, n);
+
+        System.out.println(
+                "Encrypted Message: " + encrypted);
+
+        // Decryption
+        long decrypted = power(encrypted, d, n);
+
+        System.out.println(
+                "Decrypted Message: " + decrypted);
+
+        sc.close();
+    }
+}
+
+
+week 9
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diffie-Hellman Key Exchange</title>
+
+    <style>
+        body{
+            font-family: Arial;
+            margin: 40px;
+        }
+
+        input{
+            margin: 5px;
+            padding: 5px;
+            width: 200px;
+        }
+
+        button{
+            padding: 8px 15px;
+            margin-top: 10px;
+        }
+
+        #result{
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Diffie-Hellman Key Exchange</h2>
+
+<label>Prime Number (P):</label><br>
+<input type="number" id="p"><br>
+
+<label>Primitive Root (G):</label><br>
+<input type="number" id="g"><br>
+
+<label>Alice Private Key:</label><br>
+<input type="number" id="a"><br>
+
+<label>Bob Private Key:</label><br>
+<input type="number" id="b"><br>
+
+<button onclick="exchange()">Generate Shared Key</button>
+
+<div id="result"></div>
+
+<script>
+
+    // Fast Modular Exponentiation
+    function power(base, exp, mod){
+
+        let result = 1;
+
+        while(exp > 0){
+
+            if(exp % 2 === 1)
+                result = (result * base) % mod;
+
+            base = (base * base) % mod;
+
+            exp = Math.floor(exp / 2);
+        }
+
+        return result;
+    }
+
+    function exchange(){
+
+        let p = parseInt(document.getElementById("p").value);
+        let g = parseInt(document.getElementById("g").value);
+        let a = parseInt(document.getElementById("a").value);
+        let b = parseInt(document.getElementById("b").value);
+
+        // Public Keys
+        let A = power(g, a, p);
+        let B = power(g, b, p);
+
+        // Shared Secret Keys
+        let aliceKey = power(B, a, p);
+        let bobKey = power(A, b, p);
+
+        document.getElementById("result").innerHTML =
+
+            "Alice Public Key: " + A + "<br><br>" +
+
+            "Bob Public Key: " + B + "<br><br>" +
+
+            "Alice Shared Key: " + aliceKey + "<br><br>" +
+
+            "Bob Shared Key: " + bobKey;
+    }
+
+</script>
+
+</body>
+</html>
+
+
+week 10
+
+
+import java.util.*;
+
+public class SHA1 {
+
+    // Left Rotate Function
+    static int rot(int x, int n) {
+        return (x << n) | (x >>> (32 - n));
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter text: ");
+        String msg = sc.nextLine();
+
+        // Initial SHA-1 Values
+        int h0 = 0x67452301;
+        int h1 = 0xEFCDAB89;
+        int h2 = 0x98BADCFE;
+        int h3 = 0x10325476;
+        int h4 = 0xC3D2E1F0;
+
+        int[] w = new int[80];
+
+        // Convert message to binary
+        String bin = "";
+
+        for (int i = 0; i < msg.length(); i++) {
+
+            String b =
+                    Integer.toBinaryString(msg.charAt(i));
+
+            while (b.length() < 8)
+                b = "0" + b;
+
+            bin += b;
+        }
+
+        // Original length
+        int ml = bin.length();
+
+        // Append 1 bit
+        bin += "1";
+
+        // Padding with 0s
+        while ((bin.length() + 64) % 512 != 0)
+            bin += "0";
+
+        // Append message length
+        String len = Integer.toBinaryString(ml);
+
+        while (len.length() < 64)
+            len = "0" + len;
+
+        bin += len;
+
+        // First 16 words
+        for (int i = 0; i < 16; i++) {
+
+            String temp =
+                    bin.substring(i * 32, (i + 1) * 32);
+
+            w[i] = (int)
+                    Long.parseLong(temp, 2);
+        }
+
+        // Remaining 64 words
+        for (int i = 16; i < 80; i++) {
+
+            w[i] = rot(
+                    w[i - 3] ^
+                    w[i - 8] ^
+                    w[i - 14] ^
+                    w[i - 16], 1);
+        }
+
+        int a = h0;
+        int b = h1;
+        int c = h2;
+        int d = h3;
+        int e = h4;
+
+        // 80 Rounds
+        for (int i = 0; i < 80; i++) {
+
+            int f = 0;
+            int k = 0;
+
+            if (i < 20) {
+
+                f = (b & c) | ((~b) & d);
+                k = 0x5A827999;
+            }
+
+            else if (i < 40) {
+
+                f = b ^ c ^ d;
+                k = 0x6ED9EBA1;
+            }
+
+            else if (i < 60) {
+
+                f = (b & c) | (b & d) | (c & d);
+                k = 0x8F1BBCDC;
+            }
+
+            else {
+
+                f = b ^ c ^ d;
+                k = 0xCA62C1D6;
+            }
+
+            int temp =
+                    rot(a, 5) + f + e + k + w[i];
+
+            e = d;
+            d = c;
+            c = rot(b, 30);
+            b = a;
+            a = temp;
+        }
+
+        // Final Hash Values
+        h0 += a;
+        h1 += b;
+        h2 += c;
+        h3 += d;
+        h4 += e;
+
+        // Print SHA-1 Digest
+        System.out.println("\nSHA-1 Digest:");
+
+        System.out.printf(
+                "%08x%08x%08x%08x%08x",
+                h0, h1, h2, h3, h4);
 
         sc.close();
     }
